@@ -23,6 +23,14 @@ apply plugin: 'io.spring.dependency-management'
 
 sourceCompatibility = 1.8
 
+sourceSets {
+    main {
+        java {
+            exclude 'com/hnkuan/aws/serverless/spring/samples/**'
+        }
+    }
+}
+
 repositories {
     mavenCentral()
 }
