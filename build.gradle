@@ -27,10 +27,6 @@ repositories {
     mavenCentral()
 }
 
-configurations.all {
-    exclude group: "commons-logging", module: "commons-logging"
-}
-
 dependencyManagement {
     imports {
         mavenBom "io.spring.platform:platform-bom:${springBomVersion}"
