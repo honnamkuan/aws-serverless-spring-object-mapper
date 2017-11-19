@@ -5,8 +5,8 @@ import com.amazonaws.serverless.proxy.internal.model.AwsProxyRequest;
 import com.amazonaws.serverless.proxy.internal.model.AwsProxyResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hnkuan.aws.serverless.spring.adapter.api.LambdaRequestAdapter;
-import com.hnkuan.aws.serverless.spring.handler.api.LambdaRequestHandler;
+import com.hnkuan.aws.serverless.spring.adapter.api.AwsRequestAdapter;
+import com.hnkuan.aws.serverless.spring.handler.api.AwsRequestHandler;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,22 +30,22 @@ import static org.mockito.Mockito.when;
  * @author honnamkuan
  */
 @RunWith(MockitoJUnitRunner.class)
-public class LambdaRequestAdapterImplTest {
+public class AwsRequestAdapterImplTest {
     @Mock
     private AwsProxyRequest awsProxyRequest;
 
     private ObjectMapper objectMapper = new ObjectMapper();
     @Mock
-    private LambdaRequestHandler<StubEntity> lambdaRequestHandler;
+    private AwsRequestHandler<StubEntity> awsRequestHandler;
     @Mock
     private ApiGatewayRequestContext apiGatewayRequestContext;
 
-    private LambdaRequestAdapter<StubEntity> lambdaRequestAdapter;
+    private AwsRequestAdapter<StubEntity> awsRequestAdapter;
 
     @Before
     public void setUp() throws Exception {
-        lambdaRequestAdapter = new LambdaRequestAdapterImpl<>(new TypeReference<StubEntity>() {},
-                lambdaRequestHandler,
+        awsRequestAdapter = new AwsRequestAdapterImpl<>(new TypeReference<StubEntity>() {},
+                awsRequestHandler,
                 objectMapper);
     }
 
@@ -56,7 +56,7 @@ public class LambdaRequestAdapterImplTest {
         when(awsProxyRequest.getRequestContext()).thenReturn(apiGatewayRequestContext);
         when(awsProxyRequest.getBody()).thenReturn("{\"id\":12,\"name\":\"personName\"}");
         ArgumentCaptor<StubEntity> argument = ArgumentCaptor.forClass(StubEntity.class);
-        when(lambdaRequestHandler.handle(argument.capture(),
+        when(awsRequestHandler.handle(argument.capture(),
                 eq(apiGatewayRequestContext))).thenReturn(ResponseEntity.ok()
                 .header("X-Type",
                         "array")
@@ -65,16 +65,16 @@ public class LambdaRequestAdapterImplTest {
                         3)));
 
         // Act
-        AwsProxyResponse awsProxyResponse = lambdaRequestAdapter.handle(awsProxyRequest);
+        AwsProxyResponse awsProxyResponse = awsRequestAdapter.handle(awsProxyRequest);
 
         // Assert
         InOrder inOrder = Mockito.inOrder(awsProxyRequest,
-                lambdaRequestHandler);
+                awsRequestHandler);
         inOrder.verify(awsProxyRequest)
                 .getBody();
         inOrder.verify(awsProxyRequest)
                 .getRequestContext();
-        inOrder.verify(lambdaRequestHandler)
+        inOrder.verify(awsRequestHandler)
                 .handle(any(StubEntity.class),
                         eq(apiGatewayRequestContext));
 

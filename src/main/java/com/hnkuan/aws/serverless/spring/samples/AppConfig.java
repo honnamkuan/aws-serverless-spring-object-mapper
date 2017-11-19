@@ -2,9 +2,9 @@ package com.hnkuan.aws.serverless.spring.samples;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hnkuan.aws.serverless.spring.adapter.LambdaRequestAdapterImpl;
-import com.hnkuan.aws.serverless.spring.adapter.api.LambdaRequestAdapter;
-import com.hnkuan.aws.serverless.spring.samples.handler.CustomRequestHandler;
+import com.hnkuan.aws.serverless.spring.adapter.AwsRequestAdapterImpl;
+import com.hnkuan.aws.serverless.spring.adapter.api.AwsRequestAdapter;
+import com.hnkuan.aws.serverless.spring.samples.handler.AwsRequestHandlerImpl;
 import com.hnkuan.aws.serverless.spring.samples.model.CustomRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,14 +23,14 @@ public class AppConfig {
     }
 
     @Bean
-    CustomRequestHandler lambdaRequestHandler() {
-        return new CustomRequestHandler();
+    AwsRequestHandlerImpl customRequestHandler() {
+        return new AwsRequestHandlerImpl();
     }
 
     @Bean
-    LambdaRequestAdapter<CustomRequest> lambdaRequestAdapter() {
-        return new LambdaRequestAdapterImpl<>(new TypeReference<CustomRequest>() {},
-                lambdaRequestHandler(),
+    AwsRequestAdapter<CustomRequest> awsRequestAdapter() {
+        return new AwsRequestAdapterImpl<>(new TypeReference<CustomRequest>() {},
+                customRequestHandler(),
                 objectMapper());
     }
 

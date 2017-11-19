@@ -11,6 +11,6 @@ import com.amazonaws.serverless.proxy.internal.model.AwsProxyResponse;
  * @param <I> Request POJO Type
  * @author honnamkuan
  */
-public interface LambdaRequestAdapter<I> {
+public interface AwsRequestAdapter<I> {
     AwsProxyResponse handle(AwsProxyRequest pAwsProxyRequest);
 }

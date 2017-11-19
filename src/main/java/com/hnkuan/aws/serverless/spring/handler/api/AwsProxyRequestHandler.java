@@ -2,7 +2,7 @@ package com.hnkuan.aws.serverless.spring.handler.api;
 
 import com.amazonaws.serverless.proxy.internal.model.AwsProxyRequest;
 import com.amazonaws.serverless.proxy.internal.model.AwsProxyResponse;
-import com.hnkuan.aws.serverless.spring.adapter.api.LambdaRequestAdapter;
+import com.hnkuan.aws.serverless.spring.adapter.api.AwsRequestAdapter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.ResponseEntity;
 
@@ -13,9 +13,9 @@ import org.springframework.http.ResponseEntity;
  *
  * @author honnamkuan
  */
-public interface LambdaProxyRequestHandler {
+public interface AwsProxyRequestHandler {
     /**
-     * Provides Spring Application Context containing {@link LambdaRequestAdapter},
+     * Provides Spring Application Context containing {@link AwsRequestAdapter},
      * bean.
      *
      * @return The context object.
@@ -23,11 +23,11 @@ public interface LambdaProxyRequestHandler {
     ApplicationContext getContext();
 
     /**
-     * Get an instance of {@link LambdaRequestAdapter}
+     * Get an instance of {@link AwsRequestAdapter}
      *
-     * @return The implementation of {@link LambdaRequestAdapter}
+     * @return The implementation of {@link AwsRequestAdapter}
      */
-    LambdaRequestAdapter getLambdaRequestAdapter();
+    AwsRequestAdapter getAwsRequestAdapter();
 
 
     /**

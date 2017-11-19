@@ -5,8 +5,8 @@ import com.amazonaws.serverless.proxy.internal.model.AwsProxyRequest;
 import com.amazonaws.serverless.proxy.internal.model.AwsProxyResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hnkuan.aws.serverless.spring.adapter.api.LambdaRequestAdapter;
-import com.hnkuan.aws.serverless.spring.handler.api.LambdaRequestHandler;
+import com.hnkuan.aws.serverless.spring.adapter.api.AwsRequestAdapter;
+import com.hnkuan.aws.serverless.spring.handler.api.AwsRequestHandler;
 import org.jooq.lambda.Unchecked;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
@@ -18,11 +18,11 @@ import java.util.function.BiFunction;
  *
  * @author honnamkuan
  */
-public class LambdaRequestAdapterImpl<I> implements LambdaRequestAdapter<I> {
+public class AwsRequestAdapterImpl<I> implements AwsRequestAdapter<I> {
 
     private final TypeReference<I> inputType;
     private final ObjectMapper mapper;
-    private final LambdaRequestHandler<I> handler;
+    private final AwsRequestHandler<I> handler;
 
 
     /**
@@ -30,8 +30,8 @@ public class LambdaRequestAdapterImpl<I> implements LambdaRequestAdapter<I> {
      * @param pHandler   The POJO request handler.
      * @param pMapper    An instance of Jackson Object Mapper.
      */
-    public LambdaRequestAdapterImpl(TypeReference<I> pInputType, LambdaRequestHandler<I> pHandler,
-                                    ObjectMapper pMapper) {
+    public AwsRequestAdapterImpl(TypeReference<I> pInputType, AwsRequestHandler<I> pHandler,
+                                 ObjectMapper pMapper) {
         Assert.notNull(pInputType,
                 "pInputType must not be null");
         Assert.notNull(pHandler,

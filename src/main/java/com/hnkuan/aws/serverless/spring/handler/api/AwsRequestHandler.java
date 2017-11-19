@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
  * @param <T> Input Type.
  * @author honnamkuan
  */
-public interface LambdaRequestHandler<T> {
+public interface AwsRequestHandler<T> {
     /**
      * Handle POJO input type.
      *
