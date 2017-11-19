@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 
 /**
  * Created on 5/10/2017
+ * <p>
  * The interface to be implemented for AWS API gateway proxy integration.
  *
  * @author honnamkuan
@@ -26,9 +27,8 @@ public interface LambdaProxyRequestHandler {
      *
      * @return The implementation of {@link LambdaRequestAdapter}
      */
-    default LambdaRequestAdapter getLambdaRequestAdapter() {
-        return getContext().getBean(LambdaRequestAdapter.class);
-    }
+    LambdaRequestAdapter getLambdaRequestAdapter();
+
 
     /**
      * Forward {@link AwsProxyRequest} to POJO request handler.
@@ -36,8 +36,6 @@ public interface LambdaProxyRequestHandler {
      * @param pAwsProxyRequest The {@link AwsProxyRequest}
      * @return {@link AwsProxyResponse} mapped from {@link ResponseEntity}
      */
-    default AwsProxyResponse handle(AwsProxyRequest pAwsProxyRequest) {
-        return getLambdaRequestAdapter().handle(pAwsProxyRequest);
-    }
+    AwsProxyResponse handle(AwsProxyRequest pAwsProxyRequest);
 
 }

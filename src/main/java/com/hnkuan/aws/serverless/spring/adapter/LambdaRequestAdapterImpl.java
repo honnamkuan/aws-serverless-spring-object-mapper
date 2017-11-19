@@ -5,6 +5,7 @@ import com.amazonaws.serverless.proxy.internal.model.AwsProxyRequest;
 import com.amazonaws.serverless.proxy.internal.model.AwsProxyResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hnkuan.aws.serverless.spring.adapter.api.LambdaRequestAdapter;
 import com.hnkuan.aws.serverless.spring.handler.api.LambdaRequestHandler;
 import org.jooq.lambda.Unchecked;
 import org.springframework.http.ResponseEntity;
@@ -12,21 +13,16 @@ import org.springframework.util.Assert;
 
 import java.util.function.BiFunction;
 
-
 /**
- * Created on 4/10/2017
- * <p>
- * Proxy object to configure the mapping between AWS Lambda and {@link I} request
+ * Created on 19/11/2017
  *
- * @param <I> Request POJO Type
  * @author honnamkuan
  */
-public class LambdaRequestAdapterImpl<I> implements com.hnkuan.aws.serverless.spring.adapter.api
-        .LambdaRequestAdapter<I> {
+public class LambdaRequestAdapterImpl<I> implements LambdaRequestAdapter<I> {
 
     private final TypeReference<I> inputType;
-    private ObjectMapper mapper;
-    private LambdaRequestHandler<I> handler;
+    private final ObjectMapper mapper;
+    private final LambdaRequestHandler<I> handler;
 
 
     /**
