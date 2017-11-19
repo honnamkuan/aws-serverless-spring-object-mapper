@@ -30,7 +30,7 @@ Maven
 Gradle  
 ```groovy
   	dependencies {
-	        compile 'com.github.honnamkuan:aws-serverless-spring-pojo-mapper:1.0.0'
+	        compile 'com.github.honnamkuan:aws-serverless-spring-pojo-mapper:1.0.2'
 	}
 ```
 Maven
@@ -38,7 +38,7 @@ Maven
 	<dependency>
 	    <groupId>com.github.honnamkuan</groupId>
 	    <artifactId>aws-serverless-spring-pojo-mapper</artifactId>
-	    <version>1.0.0</version>
+	    <version>1.0.2</version>
 	</dependency>
 ```
 
