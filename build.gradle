@@ -1,0 +1,48 @@
+buildscript {
+    ext {
+        springBomVersion = "Brussels-SR5"
+        joolVersion = "0.9.12"
+        awsServerlessSpringVersion = "0.7"
+        mockitoVersion = "1.10.19"
+    }
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+    }
+}
+
+group 'com.hnkuan.aws.serverless'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "io.spring.platform:platform-bom:${springBomVersion}"
+    }
+}
+
+dependencies {
+
+    compile "com.amazonaws.serverless:aws-serverless-java-container-spring:${awsServerlessSpringVersion}"
+    compile "org.springframework:spring-context"
+    compile "org.springframework:spring-context-support"
+
+    compile "org.jooq:jool:${joolVersion}"
+
+    testCompile("junit:junit")
+    testCompile("org.assertj:assertj-core")
+    testCompile "org.mockito:mockito-all:${mockitoVersion}"
+
+}
